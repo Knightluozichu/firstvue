@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <input type="button" value="浪起来" @click="lang">
+        <input type="button" value="低调" @click="stop">
+        <P>{{ msg }}</P>
+    </div>
+
+
+    <script>
+        // 1.导入vue包
+        // 2.创建vue实例
+        // 3.获取数据
+        // 4.剪切字符串，截取第一，放在后面拼接
+        // 5.设置时间间隔
+
+        var vm = new Vue({
+            el:"#app",
+            data: {
+                msg:'浪起来，像个跑马灯一样!',
+                interval_id:null
+            },
+            methods: {
+                lang(){
+                    // console.log(this.msg);
+                    // var _this = this;
+                    if (this.interval_id != null) {
+                        return;
+                    }
+
+                    this.interval_id = setInterval(()=>{
+                        //获取到头的第一个字符
+                        var start = this.msg.substring(0,1);
+                        //获取到后面的所有字符
+                        var end = this.msg.substring(1);
+                        //重新拼接得到新的字符串，并赋值给this.msg
+                        this.msg = end + start;
+                    },400)
+                    //注意：vm实例，会监听自己身上data中所有数据的改变，
+                    //只要数据一发生变化，就会自动把最新的数据，从data上同步
+                    //到页面中去；【好处：程序只需要关心数据，不需要考虑如何重新渲染DOM页面】
+                },
+
+                stop(){
+                    clearInterval(this.interval_id);
+                    this.interval_id = null;
+                }
+            },
+        })
+
+    </script>
+</body>
+</html>
