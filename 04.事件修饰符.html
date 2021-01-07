@@ -5,12 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="lib/vue.js"></script>
+    <style>
+        .inner{
+            height: 150px;
+            background-color:blue;
+        }
+
+        .outer{
+            padding: 40px;
+            background-color:burlywood;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        
+        <!-- 事件修饰符是可以串联的 -->
+        <!-- 添加事件侦听器时使用事件捕获模式 使用.capture-->
+        <!-- <div class="inner" @click.capture="div1Handler"> -->
+            
+        <!-- 使用.self 实现只有点击当前元素时候，才会触发事件处理函数 -->
+        <!-- <div class="inner" @click.self="div1Handler"> -->
+            <!-- 阻止冒泡 使用.stop -->
+            <!-- <input type="button" value="戳他" @click.stop="btnHandler"> -->
+
+            <!-- 阻止默认行为 使用.prevent -->
+            <!-- <a href="http://www.baidu.com" @click.prevent.stop="linkClick">有问题，先去百度</a> -->
+
+            <!-- 只执行一次 使用.once -->
+            <!-- <input type="button" value="戳他" @click.once="btnHandler"> -->
+
+        <!-- </div> -->
+
+        <!-- .stop和.self区别 -->
+        <!-- self只会阻止自己的冒泡行为 并不会阻止别人的冒泡行为 -->
+        <div class="outer" @click="div2Handler">
+            <div class="inner" @click.self="div1Handler">
+                <input type="button" value="戳他" @click="btnHandler">
+            </div>
+        </div>
     </div>
 
+    <script>
+        var vm = new Vue({
+             el:'#app',
+             data:{
+
+             },
+             methods: {
+                 div1Handler(){
+                    console.log("触碰了inner");
+                 },
+
+                 btnHandler(){
+                    console.log("触碰了btnHandler");
+                 },
+
+                 linkClick(){
+                     console.log("触发了连接的百度");
+                 },
+                 div2Handler(){
+                     console.log("触碰outer");
+                 }
+             },
+        })
+    </script>
 
 </body>
 </html>
