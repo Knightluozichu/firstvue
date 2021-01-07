@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <input  type="text" v-model="first_number">
+    
+        <select class="select_option" v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+    
+        <input  type="text" v-model="second_number">
+    
+        <input type="button" value="=" @click="calc">
+        
+        <input  type="text" v-model="reslut_number">
+    </div>
+    
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                first_number:"0",
+                second_number:"0",
+                reslut_number:'0',
+                opt:"+",
+            },
+            methods: {
+                calc(){
+                    console.log("计算！！")
+                    switch (this.opt) {
+                        case "+":
+                            this.reslut_number = parseFloat(this.first_number) + parseFloat(this.second_number);
+                            break;
+                        case "-":
+                            this.reslut_number = parseFloat(this.first_number) - parseFloat(this.second_number);
+                            break;
+                        case "*":
+                            this.reslut_number = parseFloat(this.first_number) * parseFloat(this.second_number);
+                            break;
+                        case "/":
+                            this.reslut_number = parseFloat(this.first_number) / parseFloat(this.second_number);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>
