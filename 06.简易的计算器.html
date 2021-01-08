@@ -37,23 +37,26 @@
             },
             methods: {
                 calc(){
-                    console.log("计算！！")
-                    switch (this.opt) {
-                        case "+":
-                            this.reslut_number = parseFloat(this.first_number) + parseFloat(this.second_number);
-                            break;
-                        case "-":
-                            this.reslut_number = parseFloat(this.first_number) - parseFloat(this.second_number);
-                            break;
-                        case "*":
-                            this.reslut_number = parseFloat(this.first_number) * parseFloat(this.second_number);
-                            break;
-                        case "/":
-                            this.reslut_number = parseFloat(this.first_number) / parseFloat(this.second_number);
-                            break;
-                        default:
-                            break;
-                    }
+                    // console.log("计算！！")
+                    // switch (this.opt) {
+                    //     case "+":
+                    //         this.reslut_number = parseFloat(this.first_number) + parseFloat(this.second_number);
+                    //         break;
+                    //     case "-":
+                    //         this.reslut_number = parseFloat(this.first_number) - parseFloat(this.second_number);
+                    //         break;
+                    //     case "*":
+                    //         this.reslut_number = parseFloat(this.first_number) * parseFloat(this.second_number);
+                    //         break;
+                    //     case "/":
+                    //         this.reslut_number = parseFloat(this.first_number) / parseFloat(this.second_number);
+                    //         break;
+                    //     default:
+                    //         break;
+                    // }
+                    var codeStr = 'parseFloat(this.first_number)' + this.opt + 'parseFloat(this.second_number)'
+                    this.reslut_number = eval(codeStr)
+                   
                 }
             },
         })
