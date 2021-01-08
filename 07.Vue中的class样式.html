@@ -28,10 +28,20 @@
 <body>
     
     <div id="app">
+        <!-- 这是一个原始class样式 -->
         <!-- <h1 class='thin red'>i m here!</h1> -->
-        <!-- <h1 :class="[{'red':flag}, 'thin']">这是一个很大很大的书法！！！</h1> -->
+
+        <!-- 第一种使用方式，直接传递一个数组 注意：这里的class需要使用 v-bind做数据绑定 -->
         <!-- <h1 :class="['red', 'thin' , 'active']">我是个好人</h1> -->
-        <h1 :class='{"red":flag , "thin":is_flag}'>i m here!</h1>
+        
+        <!-- 在数组中使用三元表达式或使用对象 -->
+        <!-- <h1 :class="[{'red':flag}, 'thin']">这是一个很大很大的书法！！！</h1> -->
+        
+        <!-- 在为class使用v-bind绑定对象的时候，对象的属性是类名，由于对象的属性可带引号，也可不带引号，所以
+        属性的值是一个标识符 -->
+        <!-- <h1 :class='{"red":flag , "thin":is_flag}'>i m here!</h1> -->
+        <!-- <h1 :class='{red:true , thin:is_flag}'>i m here!</h1> -->
+        <h1 :class="class_Obj">i m here!</h1>
     </div>
 
     <script>
@@ -39,7 +49,8 @@
             el:'#app',
             data:{
                 flag:true,
-                is_flag:true
+                is_flag:true,
+                class_Obj:{ red:true , thin:true}
             },
             methods: {
                 
