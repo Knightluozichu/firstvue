@@ -56,7 +56,7 @@
                         <!-- <td scope="row"></td> -->
                         <td>{{item.id}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.time}}</td>
+                        <td>{{item.time | timeFormat}}</td>
                         <td>
                            <a href="" @click.prevent="del(item.id)">{{item.opeation}}</a>
                         </td>
@@ -68,7 +68,20 @@
         
     </div>
 
+    <div id="app2">
+        <p>{{ dt | timeFormat }}</p>
+    </div>
+
     <script>
+
+        Vue.filter('timeFormat', function(msg){
+            var date = new Date(msg);
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            var d = date.getDay();
+            return `${y}-${m}-${d}`
+        })
+
         var vm = new Vue({
             el:'#app',
             
@@ -113,7 +126,7 @@
                     // })
 
                     var index = this.list.findIndex(item=>{
-                        if(item.id = id){
+                        if(item.id == id){
                             return true;
                         }
                     });
@@ -121,6 +134,30 @@
                     this.list.splice(index, 1);
                 }
             },
+        })
+    
+        var vm2 = new Vue({
+            el:"#app2",
+            data:{
+                dt : new Date(),
+            },
+            methods: {
+                
+            },
+            filters:{
+                timeFormat (msg){
+                    var date = new Date(msg);
+                    var y = date.getFullYear().toString().padStart(2, '0');
+                    var m = (date.getMonth() + 1).toString().padStart(2, '0');
+                    var d = date.getDay().toString().padStart(2, '0');
+
+                    var h = date.getHours().toString().padStart(2, '0')
+                    var M = date.getMinutes().toString().padStart(2, '0')
+                    var s = date.getSeconds().toString().padStart(2, '0')
+
+                    return `${y}-${m}-${d} ${h}-${M}-${s}` + "----"
+                }
+            }
         })
     </script>
 </body>
